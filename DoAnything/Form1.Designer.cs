@@ -41,6 +41,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.fontOptions = new System.Windows.Forms.ComboBox();
+            this.fontStyles = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -144,11 +145,28 @@
             this.fontOptions.TabIndex = 4;
             this.fontOptions.SelectedValueChanged += new System.EventHandler(this.fontOptions_SelectedValueChanged);
             // 
+            // fontStyles
+            // 
+            this.fontStyles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fontStyles.FormattingEnabled = true;
+            this.fontStyles.Items.AddRange(new object[] {
+            "Bold",
+            "Italic",
+            "Regular",
+            "Strikeout",
+            "Underline"});
+            this.fontStyles.Location = new System.Drawing.Point(235, 57);
+            this.fontStyles.Name = "fontStyles";
+            this.fontStyles.Size = new System.Drawing.Size(121, 21);
+            this.fontStyles.TabIndex = 5;
+            this.fontStyles.SelectedIndexChanged += new System.EventHandler(this.fontStyles_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(511, 333);
+            this.Controls.Add(this.fontStyles);
             this.Controls.Add(this.fontOptions);
             this.Controls.Add(this.downFontSize);
             this.Controls.Add(this.upFontSize);
@@ -179,6 +197,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ComboBox fontOptions;
+        private System.Windows.Forms.ComboBox fontStyles;
     }
 }
 

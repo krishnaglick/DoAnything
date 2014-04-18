@@ -25,6 +25,7 @@ namespace DoAnything
             saveFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             fontOptions.Items.AddRange(new InstalledFontCollection().Families.Select(f => f.Name).ToArray());
             fontOptions.SelectedIndex = 0;
+            fontStyles.SelectedIndex = 0;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -128,6 +129,19 @@ namespace DoAnything
         {
             richTextBox1.SelectAll();
             try { richTextBox1.SelectionFont = new Font(fontOptions.SelectedItem.ToString(), richTextBox1.SelectionFont.Size); } catch {}
+            richTextBox1.DeselectAll();
+            isSaved = false;
+        }
+
+        private void fontStyles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+            try
+            {
+                richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size, (FontStyle)Enum.Parse(typeof(FontStyle), fontStyles.SelectedItem.ToString(), true));
+            }
+            catch { }
+            ;
             richTextBox1.DeselectAll();
             isSaved = false;
         }
