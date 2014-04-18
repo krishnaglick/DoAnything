@@ -23,7 +23,7 @@ namespace DoAnything
             InitializeComponent();
             openFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             saveFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            fontOptions.Items.AddRange(new InstalledFontCollection().Families);
+            fontOptions.Items.AddRange(new InstalledFontCollection().Families.Select(f => f.Name).ToArray());
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

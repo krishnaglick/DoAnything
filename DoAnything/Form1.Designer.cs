@@ -140,7 +140,7 @@
             this.fontOptions.FormattingEnabled = true;
             this.fontOptions.Location = new System.Drawing.Point(13, 57);
             this.fontOptions.Name = "fontOptions";
-            this.fontOptions.Size = new System.Drawing.Size(121, 21);
+            this.fontOptions.Size = new System.Drawing.Size(216, 21);
             this.fontOptions.TabIndex = 4;
             // 
             // Form1
