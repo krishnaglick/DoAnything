@@ -142,6 +142,7 @@
             this.fontOptions.Name = "fontOptions";
             this.fontOptions.Size = new System.Drawing.Size(216, 21);
             this.fontOptions.TabIndex = 4;
+            this.fontOptions.SelectedValueChanged += new System.EventHandler(this.fontOptions_SelectedValueChanged);
             // 
             // Form1
             // 

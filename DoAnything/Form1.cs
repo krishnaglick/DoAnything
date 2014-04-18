@@ -24,6 +24,7 @@ namespace DoAnything
             openFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             saveFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             fontOptions.Items.AddRange(new InstalledFontCollection().Families.Select(f => f.Name).ToArray());
+            fontOptions.SelectedIndex = 0;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -110,7 +111,7 @@ namespace DoAnything
         private void upFontSize_Click(object sender, EventArgs e)
         {
             richTextBox1.SelectAll();
-            richTextBox1.SelectionFont = new System.Drawing.Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size + 1);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size + 1);
             richTextBox1.DeselectAll();
             isSaved = false;
         }
@@ -118,7 +119,15 @@ namespace DoAnything
         private void downFontSize_Click(object sender, EventArgs e)
         {
             richTextBox1.SelectAll();
-            richTextBox1.SelectionFont = new System.Drawing.Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size - 1);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size - 1);
+            richTextBox1.DeselectAll();
+            isSaved = false;
+        }
+
+        private void fontOptions_SelectedValueChanged(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+            try { richTextBox1.SelectionFont = new Font(fontOptions.SelectedItem.ToString(), richTextBox1.SelectionFont.Size); } catch {}
             richTextBox1.DeselectAll();
             isSaved = false;
         }
