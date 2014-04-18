@@ -21,20 +21,26 @@ namespace DoAnything
         public Form1()
         {
             InitializeComponent();
+            //Set standard open and save location to desktop.
             openFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             saveFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            //Get starting font size
             fontSize.Text = richTextBox1.SelectionFont.Size.ToString();
+            //Add all local font families into fontOptions combobox
             fontOptions.Items.AddRange(new InstalledFontCollection().Families.Select(f => f.Name).ToArray());
+            //Set font options and style to zero
             fontOptions.SelectedIndex = 0;
             fontStyles.SelectedIndex = 0;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //If it's saved or nothing is loaded, close.
             if (isSaved || richTextBox1.Text == String.Empty)
                 Application.Exit();
             else
             {
+                //Otherwise prompt user to save
                 DialogResult Bail = MessageBox.Show("Do you want to save your work?", "Exit Without Saving", MessageBoxButtons.YesNo);
                 if (Bail.Equals(DialogResult.No))
                     Application.Exit();
@@ -48,25 +54,23 @@ namespace DoAnything
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Beautiful about message!
             MessageBox.Show("Inspired by the ever beautiful Bilbert\nWritten by the wondrous KC");
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+            //Watches for changes
             isSaved = false;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (isSaved)
-                richTextBox1.Clear();
-            else
+            if (!isSaved)
             {
                 DialogResult Bail = MessageBox.Show("Do you want to save your work before opening a new file?", "Save Before Load", MessageBoxButtons.YesNo);
                 if (Bail.Equals(DialogResult.Yes))
                     saveToolStripMenuItem_Click(null, null);
-                else
-                    richTextBox1.Clear();
             }
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -75,6 +79,7 @@ namespace DoAnything
                 {
                     curPath = openFileDialog1.FileName;
                     richTextBox1.LoadFile(curPath, RichTextBoxStreamType.RichText);
+                    fontOptions.Text = richTextBox1.SelectionFont.FontFamily.ToString();
                     isSaved = true;
                 }
                 catch (Exception ex)
