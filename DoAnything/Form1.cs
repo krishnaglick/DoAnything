@@ -84,6 +84,7 @@ namespace DoAnything
                     curPath = openFileDialog1.FileName;
                     richTextBox1.LoadFile(curPath, RichTextBoxStreamType.RichText);
                     fontOptions.Text = richTextBox1.SelectionFont.FontFamily.Name;
+                    fontStyles.Text = richTextBox1.SelectionFont.Style.ToString();
                     isSaved = true;
                 }
                 catch (Exception ex)
