@@ -134,6 +134,7 @@ namespace DoAnything
             try { richTextBox1.SelectionFont = new Font(fontOptions.SelectedItem.ToString(), richTextBox1.SelectionFont.Size); } catch {}
             richTextBox1.DeselectAll();
             isSaved = false;
+            fontStyles.SelectedIndex = 0;
         }
 
         private void fontStyles_SelectedIndexChanged(object sender, EventArgs e)
