@@ -21,7 +21,7 @@ namespace DoAnything
         public Form1()
         {
             InitializeComponent();
-            //Set standard open and save location to desktop.
+            //Set standard open and save location to desktop
             openFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             saveFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             //Get starting font size
@@ -35,8 +35,8 @@ namespace DoAnything
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //If it's saved or nothing is loaded, close.
-            if (isSaved || richTextBox1.Text == String.Empty)
+            //If it's saved or nothing is loaded, close
+            if (isSaved || curPath == "")
                 Application.Exit();
             else
             {
@@ -68,6 +68,7 @@ namespace DoAnything
         {
             if (!isSaved)
             {
+                //If it isn't saved, prompt user to save before opening a new file
                 DialogResult Bail = MessageBox.Show("Do you want to save your work before opening a new file?", "Save Before Load", MessageBoxButtons.YesNo);
                 if (Bail.Equals(DialogResult.Yes))
                     saveToolStripMenuItem_Click(null, null);
@@ -77,9 +78,10 @@ namespace DoAnything
             {
                 try
                 {
+                    //Prompt for file location
                     curPath = openFileDialog1.FileName;
                     richTextBox1.LoadFile(curPath, RichTextBoxStreamType.RichText);
-                    fontOptions.Text = richTextBox1.SelectionFont.FontFamily.ToString();
+                    fontOptions.Text = richTextBox1.SelectionFont.FontFamily.Name;
                     isSaved = true;
                 }
                 catch (Exception ex)
@@ -95,12 +97,14 @@ namespace DoAnything
             {
                 if (!isSaved)
                 {
+                    //If it isn't saved and something IS open
                     richTextBox1.SaveFile(curPath, RichTextBoxStreamType.RichText);
                     isSaved = true;
                 }
             }
             else
             {
+                //If there's no path, then prompt user for one.
                 saveAsToolStripMenuItem_Click(null, null);
             }
         }
@@ -109,6 +113,7 @@ namespace DoAnything
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                //Prompt user for save location
                 curPath = saveFileDialog1.FileName;
                 richTextBox1.SaveFile(curPath, RichTextBoxStreamType.RichText);
                 isSaved = true;
@@ -117,6 +122,7 @@ namespace DoAnything
 
         private void upFontSize_Click(object sender, EventArgs e)
         {
+            //Increase font size by one
             richTextBox1.SelectAll();
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size + 1);
             fontSize.Text = richTextBox1.SelectionFont.Size.ToString();
@@ -126,6 +132,7 @@ namespace DoAnything
 
         private void downFontSize_Click(object sender, EventArgs e)
         {
+            //Decrease font size by one
             richTextBox1.SelectAll();
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size - 1);
             fontSize.Text = richTextBox1.SelectionFont.Size.ToString();
@@ -135,6 +142,7 @@ namespace DoAnything
 
         private void fontOptions_SelectedValueChanged(object sender, EventArgs e)
         {
+            //Change the font family to whatever is selected.
             richTextBox1.SelectAll();
             try { richTextBox1.SelectionFont = new Font(fontOptions.SelectedItem.ToString(), richTextBox1.SelectionFont.Size); } catch {}
             richTextBox1.DeselectAll();
@@ -144,6 +152,7 @@ namespace DoAnything
 
         private void fontStyles_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Change the font style (Bold, Italic, etc)
             richTextBox1.SelectAll();
             try
             {
@@ -157,6 +166,7 @@ namespace DoAnything
 
         private void fontSize_TextChanged(object sender, EventArgs e)
         {
+            //Change font size using the textbox
             richTextBox1.SelectAll();
             try { richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, Convert.ToSingle(fontSize.Text)); }
             catch { }
@@ -166,6 +176,7 @@ namespace DoAnything
 
         private void fontSize_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //Make sure only one decimal and only numbers in the font size field
             if (Char.IsDigit(e.KeyChar) || e.KeyChar == '\b' || e.KeyChar == '.')
             {
                 e.Handled = false;
