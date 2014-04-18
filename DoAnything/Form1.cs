@@ -23,6 +23,7 @@ namespace DoAnything
             InitializeComponent();
             openFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             saveFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            fontSize.Text = richTextBox1.SelectionFont.Size.ToString();
             fontOptions.Items.AddRange(new InstalledFontCollection().Families.Select(f => f.Name).ToArray());
             fontOptions.SelectedIndex = 0;
             fontStyles.SelectedIndex = 0;
@@ -30,12 +31,12 @@ namespace DoAnything
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (isSaved)
+            if (isSaved || richTextBox1.Text == String.Empty)
                 Application.Exit();
             else
             {
                 DialogResult Bail = MessageBox.Show("Do you want to save your work?", "Exit Without Saving", MessageBoxButtons.YesNo);
-                if (Bail.Equals(DialogResult.Yes))
+                if (Bail.Equals(DialogResult.No))
                     Application.Exit();
                 else
                 {
@@ -113,6 +114,7 @@ namespace DoAnything
         {
             richTextBox1.SelectAll();
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size + 1);
+            fontSize.Text = richTextBox1.SelectionFont.Size.ToString();
             richTextBox1.DeselectAll();
             isSaved = false;
         }
@@ -121,6 +123,7 @@ namespace DoAnything
         {
             richTextBox1.SelectAll();
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size - 1);
+            fontSize.Text = richTextBox1.SelectionFont.Size.ToString();
             richTextBox1.DeselectAll();
             isSaved = false;
         }
@@ -144,6 +147,31 @@ namespace DoAnything
             ;
             richTextBox1.DeselectAll();
             isSaved = false;
+        }
+
+        private void fontSize_TextChanged(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+            try { richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, Convert.ToSingle(fontSize.Text)); }
+            catch { }
+            richTextBox1.DeselectAll();
+            isSaved = false;
+        }
+
+        private void fontSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar) || e.KeyChar == '\b' || e.KeyChar == '.')
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && fontSize.Text.Count(c => c == '.') > 0)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

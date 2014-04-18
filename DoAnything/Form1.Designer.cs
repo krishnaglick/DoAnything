@@ -42,6 +42,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.fontOptions = new System.Windows.Forms.ComboBox();
             this.fontStyles = new System.Windows.Forms.ComboBox();
+            this.fontSize = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 93);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(487, 228);
+            this.richTextBox1.Size = new System.Drawing.Size(348, 228);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -81,7 +82,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(511, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(372, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -99,28 +100,28 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -150,9 +151,9 @@
             this.fontStyles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fontStyles.FormattingEnabled = true;
             this.fontStyles.Items.AddRange(new object[] {
+            "Regular",
             "Bold",
             "Italic",
-            "Regular",
             "Strikeout",
             "Underline"});
             this.fontStyles.Location = new System.Drawing.Point(235, 57);
@@ -161,11 +162,21 @@
             this.fontStyles.TabIndex = 5;
             this.fontStyles.SelectedIndexChanged += new System.EventHandler(this.fontStyles_SelectedIndexChanged);
             // 
+            // fontSize
+            // 
+            this.fontSize.Location = new System.Drawing.Point(236, 28);
+            this.fontSize.Name = "fontSize";
+            this.fontSize.Size = new System.Drawing.Size(121, 20);
+            this.fontSize.TabIndex = 6;
+            this.fontSize.TextChanged += new System.EventHandler(this.fontSize_TextChanged);
+            this.fontSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fontSize_KeyPress);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 333);
+            this.ClientSize = new System.Drawing.Size(372, 333);
+            this.Controls.Add(this.fontSize);
             this.Controls.Add(this.fontStyles);
             this.Controls.Add(this.fontOptions);
             this.Controls.Add(this.downFontSize);
@@ -198,6 +209,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ComboBox fontOptions;
         private System.Windows.Forms.ComboBox fontStyles;
+        private System.Windows.Forms.TextBox fontSize;
     }
 }
 
