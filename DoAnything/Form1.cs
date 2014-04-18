@@ -15,7 +15,7 @@ namespace DoAnything
     public partial class Form1 : Form
     {
 
-        private Boolean isSaved = true;
+        private Boolean isSaved ;
         private String curPath = "";
 
         public Form1()
@@ -31,6 +31,8 @@ namespace DoAnything
             //Set font options and style to zero
             fontOptions.SelectedIndex = 0;
             fontStyles.SelectedIndex = 0;
+            //Set isSaved to true cause nothing has happened
+            isSaved = true;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
